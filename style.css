@@ -430,9 +430,8 @@ h1 {
     margin-left: -60%;
 }
 
-/* Menu hamburger pout le format telephone */
-#menuToggle
-{
+/* Menu hamburger  */
+#menuToggle{
   display: block;
   position: relative;
   left: 309px;
