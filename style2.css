@@ -1,0 +1,152 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+@media (max-width: 479px) {
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    /* code css du format telephone */
+    body {
+        width: 100%;
+    }
+    /* menu avec lien pour le reseaux sociaux */
+    .side-bar {
+        width: 50px;
+        height: 100%;
+        background:linear-gradient(#00545d,#000729);
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        right: 0;
+        top: 0
+    
+    }
+    /* mes differente "page" */
+    .container {
+        width: 100%;
+        height: 100vh;
+        margin-left: 50px;
+    }
+    
+    #container-1 {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        font-size: 2rem;
+        font-family: 'Asar', serif;
+        width: 600px;
+        height: 20%;
+    }
+    
+    #container-2 {
+        font-family:'Times New Roman', Times, serif ;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-size: 2rem;
+        width: 600px;
+        height: 20%;
+    }
+    
+    
+    #container-3 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        font-family:'Times New Roman', Times, serif;
+        width: 600px;
+        height: 20%;
+    }
+    
+    #container-4 {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        font-size: 2rem;
+        font-family: 'Cormorant Unicase', serif;
+        width: 600px;
+        height: 20%;
+    }
+    
+    #container-5 {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        font-size: 2rem;
+        font-family: 'Asar', serif;
+        width: 600px;
+        height: 20%;
+    }
+    /* container 1 */
+    #presentation{
+        margin-top: 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-family: 'Cormorant Unicase', serif;;
+    }
+    .logo {
+        margin-top: 600px;
+        width: 400px;
+    }
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: -200px;
+        left: 150px;
+        
+    }
+    /*container 2 */
+    .right img {
+        width: 100%;   
+    }
+    .text3{
+       color: black;
+    }
+    /* container 3 */
+    #formation{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #formation p {
+        font-size: 20px;
+    }
+    #competence {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .carre {
+        width: 250px;
+        height: 20px;
+        background-color: white;
+        border-color: rgb(255, 248, 248);
+    }
+    .carre2 {
+        width: 75%;
+        height: 20px;
+        background-color: rgb(0, 0, 0);
+    }
+    .carre3 {
+        width: 25%;
+        height: 20px;
+        background-color: rgb(0, 0, 0);
+    }
+}

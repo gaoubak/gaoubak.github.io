@@ -1,0 +1,281 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+}
+.menu1 li {
+    list-style: none;
+}
+.menu1  a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+.menu li {
+    list-style: none;
+}
+
+.menu a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+.menu1 a:hover {
+    text-decoration: underline;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+/* VERSION DESKTOP */
+@media (min-width: 700px) {
+    .btn-menu {
+        display: none;
+    }
+    .menu {
+        display: none;
+    }
+    .menu1 {
+        display: flex;
+        gap: 10px;
+        background-color: white;
+        color: black;
+    }
+    .menu1 {
+        position: fixed;
+        right: -80%;
+        width: 80%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        transition: all 0.5s;
+        z-index: 1000;
+    }
+
+    .btn-menu {
+        display: none;
+    }
+    body {
+        background: url(https://data.photofunky.net/output/image/0/b/f/a/0bfa59/photofunky.gif);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .open .menu1 {
+        right: 0;
+    }
+
+    .btn-menu1 {
+        width: 60px;
+        height: 47px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .btn-menu1 span {
+        position: absolute;
+        width: 100%;
+        height: 7px;
+        background-color: rgb(230, 217, 219);
+        border-radius: 4px;
+        opacity: 1;
+        transition: all 0.6s;
+    }
+
+    .span-4 {
+        top: 0;
+    }
+
+    .span-5 {
+        top: 20px;
+        left: 0;
+    }
+
+    .span-6 {
+        top: 40px;
+        left: 0;
+    }
+
+    .open .span-4 {
+        transform: rotate(-45deg);
+        top: 50%;
+    }
+
+    .open .span-5 {
+        transform: rotate(45deg);
+        top: 50%;
+    }
+
+    .open .span-6{
+        left: -40px;
+        opacity: 0;
+    }
+}
+
+
+
+/* VERSION MOBILE */
+@media (max-width: 699px) {
+    .menu {
+        position: fixed;
+        top: 110px;
+        right: -80%;
+        width: 80%;
+        background-color: black;
+        min-height: 50vh;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: center;
+        transition: all 0.5s;
+        z-index: 1000;
+    }
+    .menu1 
+    .btn-menu1{
+        display: none;
+    }
+
+    .open .menu {
+        right: 0;
+    }
+
+    .btn-menu {
+        width: 60px;
+        height: 47px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .btn-menu span {
+        position: absolute;
+        width: 100%;
+        height: 7px;
+        background-color: crimson;
+        border-radius: 4px;
+        opacity: 1;
+        transition: all 0.6s;
+    }
+
+    .span-1 {
+        top: 0;
+    }
+
+    .span-2 {
+        top: 20px;
+        left: 0;
+    }
+
+    .span-3 {
+        top: 40px;
+        left: 0;
+    }
+
+    .open .span-1 {
+        transform: rotate(-45deg);
+        top: 50%;
+    }
+
+    .open .span-3 {
+        transform: rotate(45deg);
+        top: 50%;
+    }
+
+    .open .span-2 {
+        left: -40px;
+        opacity: 0;
+    }
+}
+
+
+
+
+
+
+
+#page {
+    position: fixed;
+    top: 110px;
+    left: 0;
+    display: grid;
+    grid-template-columns: 100px auto;
+}
+
+#navigation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    position: fixed;
+    top: 45vh;
+    left: 14px;
+    width: 70px;
+    height: 150px;
+    list-style: none;
+}
+
+#navigation a {
+    display: block;
+    width: 30px;
+    height: 6px;
+    background-color: white;
+    transition: width 0.4s;
+}
+
+#navigation a:hover {
+    width: 50px;
+}
+
+#page .right {
+    height: calc(100vh - 110px);
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.container {
+    height: calc(100vh - 110px);
+    padding: 30px;
+}
+
+#container-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+}
+
+#container-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+}
+
+#container-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+}
+#container-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+}
+#container-5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+}
