@@ -1,0 +1,73 @@
+export const experiences = [
+  {
+    id: 1,
+    title: 'DÉVELOPPEUR FULL-STACK',
+    type: 'ALTERNANCE',
+    company: 'Siko Mobility',
+    location: 'Paris',
+    period: 'Oct 2024 – Présent',
+    rarity: 'exotic',
+    icon: '◆',
+    description: 'Siko FS simplifie la vente à crédit pour les commerçants (mobilité électrique, nautisme, habitat…) en agrégeant plusieurs banques partenaires sur une plateforme B2B2C.',
+    triumphs: [
+      'Refonte complète de la plateforme from scratch : API REST Symfony 7.x / PHP 8.4',
+      'Intégration Floa Bank : dossiers de crédit CREDIT, LOA, LLD avec logique waterfall',
+      'Intégration HubSpot CRM : synchronisation asynchrone via Symfony Messenger',
+      'Intégration Stripe : gestion paiements et abonnements',
+      "Développement du parcours marchand : tableau de bord statuts/paiements/commissions",
+      "Mise en place d'indicateurs de pilotage pour orienter les décisions métier",
+    ],
+  },
+  {
+    id: 2,
+    title: 'DÉVELOPPEUR',
+    type: 'FREELANCE',
+    company: 'Missions indépendantes',
+    location: 'Remote',
+    period: '2024 – 2025',
+    rarity: 'legendary',
+    icon: '◈',
+    description: 'Développement de solutions web sur mesure pour clients variés en autonomie complète.',
+    triumphs: [
+      'Concierge IA pour locations Airbnb (PHP, intégration LLM) : automatisation des réponses voyageurs',
+      'Phase initiale Siko Mobility : architecture et développement from scratch avant transfert en alternance',
+      'Solutions web sur mesure (PHP, API REST) pour clients variés',
+    ],
+  },
+  {
+    id: 3,
+    title: 'DÉVELOPPEUR BACKEND',
+    type: 'ALTERNANCE',
+    company: 'Spin Interactive',
+    location: 'Paris',
+    period: 'Août 2022 – Sept 2024',
+    rarity: 'rare',
+    icon: '⬡',
+    description: "Agence web parisienne. Développement de solutions WordPress sur mesure et d'APIs REST indépendantes.",
+    triumphs: [
+      'Thèmes WordPress sur mesure + plugin API REST (WordPress comme backend headless)',
+      'Frontend Vue.js découplé : composants, appels API, gestion état',
+      'APIs REST PHP orienté objet — architecture indépendante du CMS',
+      'Automatisation de traitements BDD → CSV pour data analyse',
+      "Mise en place CI/CD et environnements Docker",
+      'Optimisation performance, sécurité, CORS',
+    ],
+  },
+]
+
+export const formations = [
+  {
+    degree: 'MASTER INGÉNIERIE WEB ET MOBILE',
+    school: 'Hetic',
+    location: 'Montreuil',
+    period: '2024 – 2026',
+    rarity: 'legendary',
+  },
+  {
+    degree: 'BACHELOR DÉVELOPPEUR WEB',
+    school: 'Hetic',
+    location: 'Montreuil',
+    period: '2021 – 2024',
+    rarity: 'rare',
+  },
+]
