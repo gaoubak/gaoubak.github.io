@@ -261,25 +261,26 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   overflow: hidden;
 }
 
-/* ── Blurred environment background (blurred character photo) ── */
+/* ── Blurred environment background ── */
 .char-bg {
   position: absolute;
-  inset: -40px;
+  inset: -60px;
   background-image: url('/character-front.jpg');
   background-size: cover;
-  background-position: center 25%;
-  filter: blur(70px) brightness(0.55) saturate(0.75);
+  background-position: center 20%;
+  filter: blur(90px) brightness(0.45) saturate(0.6);
   z-index: 0;
 }
-/* Warm tint overlay */
+/* Warm amber glow — mimics Destiny 2 cave/environment lighting */
 .char-bg::after {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 50% 100%, rgba(180, 140, 80, 0.45) 0%, transparent 60%),
-    radial-gradient(ellipse at 50% 0%, rgba(10, 18, 35, 0.6) 0%, transparent 50%),
-    rgba(35, 28, 18, 0.35);
+    radial-gradient(ellipse 70% 55% at 50% 80%, rgba(200, 150, 60, 0.55) 0%, transparent 65%),
+    radial-gradient(ellipse 90% 40% at 50% 50%, rgba(140, 90, 30, 0.25) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 0%, rgba(8, 14, 28, 0.75) 0%, transparent 55%),
+    rgba(20, 14, 8, 0.4);
 }
 
 /* ── Character figure (centered, tall) ────────────────────────── */
@@ -322,30 +323,45 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
 }
 
 /* ── Name banner (SAVIOR-style) ───────────────────────────────── */
+@keyframes bannerShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
 .name-banner {
   position: absolute;
   bottom: 52px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  background: rgba(90, 40, 145, 0.58);
-  border-top: 1px solid rgba(180, 100, 240, 0.45);
-  border-bottom: 1px solid rgba(180, 100, 240, 0.45);
-  padding: 10px 64px;
+  background: rgba(70, 28, 120, 0.72);
+  border-top: 1px solid rgba(180, 100, 240, 0.55);
+  border-bottom: 1px solid rgba(180, 100, 240, 0.55);
+  padding: 12px 80px;
   text-align: center;
   white-space: nowrap;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 40px rgba(120, 40, 200, 0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  overflow: hidden;
 }
-.name-banner::before,
+/* sliding light sweep */
+.name-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.06) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: bannerShimmer 4s linear infinite;
+}
+/* cyan accent bars are now part of the border-left / border-right */
 .name-banner::after {
   content: '';
   position: absolute;
   top: -1px; bottom: -1px;
-  width: 2px;
-  background: var(--cyan);
+  left: 0; right: 0;
+  border-left: 2px solid var(--cyan);
+  border-right: 2px solid var(--cyan);
+  pointer-events: none;
 }
-.name-banner::before { left: 0; }
-.name-banner::after  { right: 0; }
 
 .char-name {
   display: block;
@@ -394,24 +410,24 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
 
 /* ── Slot cards — SQUARE Destiny-style ───────────────────────── */
 .slot-card {
-  width: 76px;
-  height: 76px;
-  background: rgba(6, 10, 22, 0.84);
-  border: 1px solid rgba(255,255,255,0.1);
+  width: 88px;
+  height: 88px;
+  background: rgba(6, 10, 22, 0.88);
+  border: 1px solid rgba(255,255,255,0.08);
   border-left: 3px solid rgba(255,255,255,0.15);
   position: relative;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
   padding: 6px 4px 4px;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
 }
 
-.slot-card:hover { transform: scale(1.06); }
+.slot-card:hover { transform: scale(1.08) translateX(3px); }
 
 .slot-card--exotic    { border-left-color: var(--gold);   }
 .slot-card--legendary { border-left-color: var(--purple); }

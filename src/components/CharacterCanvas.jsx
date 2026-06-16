@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
-import { Suspense, useRef, useMemo } from 'react'
+import { Suspense, useRef, useMemo, useState, useEffect } from 'react'
 import { TextureLoader, AdditiveBlending, DoubleSide } from 'three'
 
 /* ─── Shaders ────────────────────────────────────────────────── */
@@ -134,11 +134,13 @@ function CharacterGlow() {
   )
 }
 
-/* ─── Character plane (rotating through 4 angles) ───────────── */
-function CharacterPlane({ textures }) {
-  const matRef  = useRef()
-  const meshRef = useRef()
-  const t       = useRef(0)
+/* ─── Character plane (mouse-controlled rotation) ────────────── */
+function CharacterPlane({ textures, onInteracted }) {
+  const matRef    = useRef()
+  const meshRef   = useRef()
+  const t         = useRef(0)
+  // smoothed cycle value driven by mouse, starts at front (0.125 = facing forward)
+  const cycleSmooth = useRef(0.125)
 
   const uniforms = useMemo(() => ({
     mapA:      { value: textures[0] },
@@ -146,18 +148,25 @@ function CharacterPlane({ textures }) {
     mixFactor: { value: 0 },
   }), [textures])
 
-  // Camera parallax ref
   const { camera } = useThree()
 
   useFrame((state, dt) => {
     t.current += dt
 
-    // Slow auto-rotation: one full cycle every 16 s
-    const cycle    = (t.current % 16) / 16
-    const idx      = Math.floor(cycle * 4)
-    const nextIdx  = (idx + 1) % 4
-    const local    = (cycle * 4) % 1
-    const mix      = local > 0.78 ? (local - 0.78) / 0.22 : 0
+    // Map mouse.x (-1 → 1) to full rotation cycle (0 → 1)
+    // Center = front view, move right = show back, left = other side
+    const targetCycle = (state.mouse.x + 1) / 2
+
+    // Smooth the transition between angles (lerp speed = 0.06)
+    cycleSmooth.current += (targetCycle - cycleSmooth.current) * 0.06
+
+    const cycle   = cycleSmooth.current
+    const raw     = cycle * 4
+    const idx     = Math.floor(raw) % 4
+    const nextIdx = (idx + 1) % 4
+    const local   = raw % 1
+    // crossfade in the last 22% of each segment
+    const mix     = local > 0.78 ? (local - 0.78) / 0.22 : 0
 
     if (matRef.current) {
       matRef.current.uniforms.mapA.value      = textures[idx]
@@ -170,11 +179,10 @@ function CharacterPlane({ textures }) {
       meshRef.current.position.y = Math.sin(t.current * 0.65) * 0.045
     }
 
-    // Subtle camera parallax on mouse
-    const mx = state.mouse.x
+    // Subtle vertical parallax only (horizontal is now used for rotation)
     const my = state.mouse.y
-    camera.position.x += (mx * 0.22 - camera.position.x) * 0.04
-    camera.position.y += (my * 0.12 + 0.25 - camera.position.y) * 0.04
+    camera.position.y += (my * 0.08 + 0.25 - camera.position.y) * 0.04
+    camera.position.x += (0 - camera.position.x) * 0.04
     camera.lookAt(0, 0, 0)
   })
 
@@ -223,16 +231,54 @@ function Scene() {
 
 /* ─── Export ─────────────────────────────────────────────────── */
 export default function CharacterCanvas() {
+  const [hintVisible, setHintVisible] = useState(true)
+
+  useEffect(() => {
+    // Hide hint after first real mouse move over the canvas
+    const hide = () => setHintVisible(false)
+    window.addEventListener('mousemove', hide, { once: true })
+    // Also auto-hide after 4 s in case user doesn't move mouse
+    const timer = setTimeout(() => setHintVisible(false), 4000)
+    return () => { window.removeEventListener('mousemove', hide); clearTimeout(timer) }
+  }, [])
+
   return (
-    <Canvas
-      gl={{ alpha: true, antialias: true }}
-      camera={{ position: [0, 0.25, 5.8], fov: 38 }}
-      style={{ position: 'absolute', inset: 0 }}
-      dpr={[1, 2]}
-    >
-      <Suspense fallback={null}>
-        <Scene />
-      </Suspense>
-    </Canvas>
+    <div style={{ position: 'absolute', inset: 0 }}>
+      <Canvas
+        gl={{ alpha: true, antialias: true }}
+        camera={{ position: [0, 0.25, 5.8], fov: 38 }}
+        style={{ position: 'absolute', inset: 0 }}
+        dpr={[1, 2]}
+      >
+        <Suspense fallback={null}>
+          <Scene />
+        </Suspense>
+      </Canvas>
+
+      {/* Rotation hint */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '120px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          color: 'rgba(90,218,255,0.6)',
+          fontFamily: "'Share Tech Mono', monospace",
+          fontSize: '11px',
+          letterSpacing: '0.15em',
+          pointerEvents: 'none',
+          opacity: hintVisible ? 1 : 0,
+          transition: 'opacity 0.8s ease',
+          zIndex: 20,
+        }}
+      >
+        <span>←</span>
+        <span>MOVE MOUSE TO ROTATE</span>
+        <span>→</span>
+      </div>
+    </div>
   )
 }
