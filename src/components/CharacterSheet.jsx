@@ -19,99 +19,132 @@ const P = {
 
 const RARITY_COLOR = { gold: P.gold, blue: P.blue, purple: P.purple, gray: P.gray }
 
-// ─── Avatar SVG — original flat geometric silhouette ──────────────
+// ─── Avatar SVG — flat geometric guardian silhouette ──────────────
 function AvatarSVG() {
   return (
-    <svg viewBox="0 0 200 380" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 200 400" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient id="ag" cx="50%" cy="45%" r="55%">
-          <stop offset="0%"   stopColor="#e91e8c" stopOpacity="0.14"/>
+        {/* Warm floor glow — amber from below */}
+        <radialGradient id="flr" cx="50%" cy="100%" r="55%">
+          <stop offset="0%"   stopColor="#c87c10" stopOpacity="0.55"/>
+          <stop offset="100%" stopColor="#c87c10" stopOpacity="0"/>
+        </radialGradient>
+        {/* Chest gem glow */}
+        <radialGradient id="gem" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stopColor="#e91e8c" stopOpacity="0.9"/>
+          <stop offset="55%"  stopColor="#e91e8c" stopOpacity="0.25"/>
           <stop offset="100%" stopColor="#e91e8c" stopOpacity="0"/>
         </radialGradient>
-        <radialGradient id="cg" cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stopColor="#e91e8c" stopOpacity="0.6"/>
-          <stop offset="100%" stopColor="#e91e8c" stopOpacity="0"/>
-        </radialGradient>
-        <linearGradient id="clk" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%"   stopColor="#1d1d38"/>
-          <stop offset="100%" stopColor="#0e0e1e"/>
+        {/* Cloak — dark navy, CLEARLY different from #0b0b10 background */}
+        <linearGradient id="clk" x1="30%" y1="0%" x2="70%" y2="100%">
+          <stop offset="0%"   stopColor="#22285a"/>
+          <stop offset="100%" stopColor="#141840"/>
         </linearGradient>
+        {/* Hood */}
         <linearGradient id="hd" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%"   stopColor="#232342"/>
-          <stop offset="100%" stopColor="#141428"/>
+          <stop offset="0%"   stopColor="#1c2048"/>
+          <stop offset="100%" stopColor="#10142e"/>
         </linearGradient>
-        <linearGradient id="sp" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%"   stopColor="#282848"/>
-          <stop offset="100%" stopColor="#1a1a32"/>
+        {/* Shoulder pads */}
+        <linearGradient id="sh" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stopColor="#2c3070"/>
+          <stop offset="100%" stopColor="#1c2050"/>
+        </linearGradient>
+        {/* Chest plate */}
+        <linearGradient id="cp" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stopColor="#20245a"/>
+          <stop offset="100%" stopColor="#161a48"/>
+        </linearGradient>
+        {/* Teal rim light from the left */}
+        <linearGradient id="rim" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stopColor="#2fe6d8" stopOpacity="0.22"/>
+          <stop offset="35%"  stopColor="#2fe6d8" stopOpacity="0"/>
         </linearGradient>
       </defs>
 
-      {/* ambient glow behind figure */}
-      <ellipse cx="100" cy="185" rx="92" ry="135" fill="url(#ag)"/>
+      {/* ── Environment light ── */}
+      <ellipse cx="100" cy="395" rx="120" ry="55" fill="url(#flr)"/>
+      <ellipse cx="100" cy="330" rx="100" ry="70" fill="rgba(160,110,30,0.1)"/>
 
-      {/* ── Cloak ── */}
-      <path d="M32 150 Q18 265 12 380 L188 380 Q182 265 168 150 Z" fill="url(#clk)"/>
+      {/* ── CLOAK (dark navy — visible against bg) ── */}
+      <path d="M34 154 Q20 272 14 400 L186 400 Q180 272 166 154 Z" fill="url(#clk)" stroke="rgba(50,55,110,0.7)" strokeWidth="1.2"/>
 
-      {/* cloak seam lines */}
-      <path d="M100 158 L82 380"  stroke="#242450" strokeWidth="1.2" opacity="0.55"/>
-      <path d="M100 158 L118 380" stroke="#242450" strokeWidth="1.2" opacity="0.55"/>
-      <path d="M78 222 L58 380"   stroke="#242450" strokeWidth="0.6" opacity="0.3"/>
-      <path d="M122 222 L142 380" stroke="#242450" strokeWidth="0.6" opacity="0.3"/>
+      {/* Teal rim light on left edge of cloak */}
+      <path d="M34 154 Q20 272 14 400 L38 400 Q30 272 48 162 Z" fill="url(#rim)"/>
 
-      {/* fabric creases */}
-      <path d="M30 238 Q100 246 170 238" stroke="#242450" strokeWidth="0.8" fill="none" opacity="0.4"/>
-      <path d="M26 300 Q100 307 174 300" stroke="#242450" strokeWidth="0.6" fill="none" opacity="0.3"/>
+      {/* Cloak center seam — teal, visible */}
+      <path d="M100 162 L88 400"  stroke="rgba(47,230,216,0.3)" strokeWidth="1.1"/>
+      <path d="M100 162 L112 400" stroke="rgba(47,230,216,0.3)" strokeWidth="1.1"/>
 
-      {/* ── Shoulder pauldrons ── */}
-      <polygon points="10,150 48,132 58,155 24,160" fill="url(#sp)"/>
-      <line x1="10" y1="154" x2="48" y2="136" stroke={P.gold} strokeWidth="1" opacity="0.4"/>
-      <line x1="24" y1="160" x2="58" y2="155" stroke="#252550" strokeWidth="0.8" opacity="0.6"/>
+      {/* Secondary fold lines */}
+      <path d="M80 205 L62 400"   stroke="rgba(50,55,110,0.55)" strokeWidth="0.8"/>
+      <path d="M120 205 L138 400" stroke="rgba(50,55,110,0.55)" strokeWidth="0.8"/>
 
-      <polygon points="190,150 152,132 142,155 176,160" fill="url(#sp)"/>
-      <line x1="190" y1="154" x2="152" y2="136" stroke={P.gold} strokeWidth="1" opacity="0.4"/>
-      <line x1="176" y1="160" x2="142" y2="155" stroke="#252550" strokeWidth="0.8" opacity="0.6"/>
+      {/* Fabric crease arcs */}
+      <path d="M28 242 Q100 252 172 242" stroke="rgba(40,46,100,0.5)" strokeWidth="0.9" fill="none"/>
+      <path d="M22 308 Q100 316 178 308" stroke="rgba(40,46,100,0.4)" strokeWidth="0.7" fill="none"/>
 
-      {/* ── Chest armor plate ── */}
-      <path d="M52 150 L148 150 L156 198 L44 198 Z" fill="#18183a"/>
-      <line x1="100" y1="150" x2="100" y2="198" stroke="#2a2a56" strokeWidth="1.5" opacity="0.7"/>
-      <line x1="46"  y1="172" x2="154" y2="172" stroke="#2a2a56" strokeWidth="0.8" opacity="0.5"/>
+      {/* ── SHOULDER PAULDRONS ── */}
+      <polygon points="8,154 52,132 64,158 24,164" fill="url(#sh)" stroke="rgba(50,55,120,0.65)" strokeWidth="1"/>
+      {/* Gold top highlight */}
+      <line x1="8"  y1="158" x2="52"  y2="136" stroke={P.gold} strokeWidth="2" opacity="0.6"/>
+      {/* Teal accent lower */}
+      <line x1="24" y1="164" x2="64"  y2="158" stroke="rgba(47,230,216,0.4)" strokeWidth="0.9"/>
 
-      {/* chest core gem */}
-      <circle cx="100" cy="170" r="11"  fill="#08081a"/>
-      <circle cx="100" cy="170" r="9"   fill="url(#cg)"/>
-      <circle cx="100" cy="170" r="5"   fill="#e91e8c" opacity="0.65"/>
-      <circle cx="100" cy="170" r="2.5" fill={P.gold}  opacity="0.9"/>
+      <polygon points="192,154 148,132 136,158 176,164" fill="url(#sh)" stroke="rgba(50,55,120,0.65)" strokeWidth="1"/>
+      <line x1="192" y1="158" x2="148" y2="136" stroke={P.gold} strokeWidth="2" opacity="0.6"/>
+      <line x1="176" y1="164" x2="136" y2="158" stroke="rgba(47,230,216,0.4)" strokeWidth="0.9"/>
 
-      {/* ── Belt ── */}
-      <rect x="56"  y="200" width="88" height="14" rx="3" fill="#1c1c3e"/>
-      <rect x="86"  y="198" width="28" height="18" rx="3" fill="#242448"/>
-      <rect x="93"  y="203" width="14" height="8"  rx="1" fill={P.gold}  opacity="0.22"/>
+      {/* ── CHEST ARMOR PLATE ── */}
+      <path d="M50 154 L150 154 L158 204 L42 204 Z" fill="url(#cp)" stroke="rgba(50,55,120,0.6)" strokeWidth="1"/>
+      {/* Chest vertical teal seam */}
+      <line x1="100" y1="154" x2="100" y2="204" stroke="rgba(47,230,216,0.5)" strokeWidth="1.4"/>
+      {/* Chest horizontal teal seam */}
+      <line x1="44"  y1="178" x2="156" y2="178" stroke="rgba(47,230,216,0.3)" strokeWidth="0.9"/>
+      {/* Diagonal edge accents */}
+      <line x1="50"  y1="154" x2="42"  y2="178" stroke="rgba(47,230,216,0.18)" strokeWidth="0.7"/>
+      <line x1="150" y1="154" x2="158" y2="178" stroke="rgba(47,230,216,0.18)" strokeWidth="0.7"/>
 
-      {/* ── Collar ── */}
-      <path d="M80 150 L120 150 L116 120 L84 120 Z" fill="#1a1a3a"/>
+      {/* ── CHEST GEM — PROMINENT ── */}
+      {/* Outer glow halo */}
+      <circle cx="100" cy="174" r="24" fill="url(#gem)" opacity="0.55"/>
+      {/* Mid glow ring */}
+      <circle cx="100" cy="174" r="14" fill="rgba(233,30,140,0.15)"/>
+      <circle cx="100" cy="174" r="13" stroke="#e91e8c" strokeWidth="1.5" fill="none" opacity="0.4"/>
+      {/* Inner gem body */}
+      <circle cx="100" cy="174" r="8"  fill="#060410"/>
+      {/* Gem fill */}
+      <circle cx="100" cy="174" r="6"  fill="#e91e8c" opacity="0.82"/>
+      {/* Bright core */}
+      <circle cx="100" cy="174" r="3"  fill={P.gold} opacity="0.95"/>
+      <circle cx="99"  cy="173" r="1"  fill="white"  opacity="0.7"/>
 
-      {/* ── Hood outer ── */}
-      <path d="M24 90 Q100 4 176 90 Q192 132 182 154 L18 154 Q8 132 24 90 Z" fill="url(#hd)"/>
+      {/* ── BELT ── */}
+      <rect x="58"  y="206" width="84" height="14" rx="3" fill="#1e2252" stroke="rgba(50,55,110,0.5)" strokeWidth="0.9"/>
+      <rect x="86"  y="204" width="28" height="18" rx="3" fill="#24285e" stroke="rgba(50,55,110,0.4)" strokeWidth="0.8"/>
+      <rect x="93"  y="209" width="14" height="8"  rx="1.5" fill={P.gold} opacity="0.38"/>
+      <rect x="97"  y="211" width="6"  height="4"  rx="1"   fill={P.gold} opacity="0.65"/>
 
-      {/* hood trim */}
-      <path d="M26 92 Q100 10 174 92" stroke={P.gold} strokeWidth="1.5" fill="none" opacity="0.32"/>
+      {/* ── COLLAR ── */}
+      <path d="M80 154 L120 154 L115 122 L85 122 Z" fill="#1a1e48"/>
 
-      {/* side fold lines */}
-      <path d="M24 90 Q15 118 18 152" stroke="#26265a" strokeWidth="0.8" fill="none" opacity="0.6"/>
-      <path d="M176 90 Q185 118 182 152" stroke="#26265a" strokeWidth="0.8" fill="none" opacity="0.6"/>
+      {/* ── HOOD ── */}
+      <path d="M22 92 Q100 4 178 92 Q194 134 184 156 L16 156 Q6 134 22 92 Z" fill="url(#hd)" stroke="rgba(50,55,110,0.7)" strokeWidth="1.2"/>
 
-      {/* inner fold */}
-      <path d="M68 94 Q100 80 132 94" stroke="#2a2a5a" strokeWidth="0.7" fill="none" opacity="0.5"/>
+      {/* Gold hood trim — BRIGHT and prominent */}
+      <path d="M24 94 Q100 10 176 94" stroke={P.gold} strokeWidth="2.8" fill="none" opacity="0.7"/>
+      {/* Secondary inner gold arc */}
+      <path d="M32 104 Q100 26 168 104" stroke={P.gold} strokeWidth="1" fill="none" opacity="0.28"/>
 
-      {/* ── Face void ── */}
-      <ellipse cx="100" cy="115" rx="44" ry="52" fill="#04040c"/>
-      <ellipse cx="100" cy="119" rx="32" ry="40" fill="#020208"/>
+      {/* Side edge lines */}
+      <path d="M22 92 Q13 120 16 154" stroke="rgba(50,55,110,0.7)" strokeWidth="1" fill="none"/>
+      <path d="M178 92 Q187 120 184 154" stroke="rgba(50,55,110,0.7)" strokeWidth="1" fill="none"/>
 
-      {/* subtle inner shadow */}
-      <ellipse cx="100" cy="112" rx="36" ry="44" fill="none" stroke="#0a0a20" strokeWidth="4" opacity="0.5"/>
-
-      {/* ── Class glyph on chest (small, decorative) ── */}
-      <polygon points="100,157 107,168 93,168" fill={P.gold} opacity="0.18"/>
+      {/* ── FACE VOID ── */}
+      <ellipse cx="100" cy="116" rx="45" ry="54" fill="#03030c"/>
+      <ellipse cx="100" cy="120" rx="35" ry="44" fill="#020209"/>
+      {/* Edge of void — subtle inner rim */}
+      <ellipse cx="100" cy="116" rx="45" ry="54" stroke="rgba(35,40,90,0.5)" strokeWidth="2.5" fill="none"/>
     </svg>
   )
 }
@@ -711,7 +744,7 @@ export default function CharacterSheet() {
       <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden' }}>
 
         {/* ── Main 3-column grid ── */}
-        <div style={{ display: 'grid', gridTemplateColumns: '100px 1fr 210px', gap: 0, padding: '14px 16px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '110px 1fr 190px', gap: 0, padding: '12px 16px' }}>
 
           {/* LEFT: subclass + weapon slots + ghost */}
           <div className="flex flex-col gap-3" style={{ paddingRight: 10, paddingTop: 4 }}>
@@ -731,9 +764,16 @@ export default function CharacterSheet() {
           </div>
 
           {/* CENTER: avatar + status + title + champions */}
-          <div className="flex flex-col items-center justify-end relative" style={{ minHeight: 420, paddingBottom: 8 }}>
-            {/* background vignette */}
-            <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 55% 60% at 50% 52%, rgba(233,30,140,0.04) 0%, transparent 70%)', pointerEvents: 'none' }}/>
+          <div className="flex flex-col items-center justify-end relative" style={{ minHeight: 460, paddingBottom: 8 }}>
+            {/* Strong multi-layer background glow */}
+            <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none',
+              background: `
+                radial-gradient(ellipse 80% 45% at 50% 96%, rgba(200,140,40,0.45) 0%, transparent 65%),
+                radial-gradient(ellipse 65% 55% at 50% 75%, rgba(160,110,30,0.2) 0%, transparent 65%),
+                radial-gradient(ellipse 50% 60% at 50% 48%, rgba(30,25,80,0.35) 0%, transparent 70%),
+                radial-gradient(ellipse 30% 30% at 25% 60%, rgba(47,230,216,0.06) 0%, transparent 60%)
+              `
+            }}/>
 
             {/* status badges */}
             <div className="absolute top-0 left-0 right-0 flex flex-wrap gap-1.5 justify-center" style={{ paddingTop: 2 }}>
@@ -741,7 +781,7 @@ export default function CharacterSheet() {
             </div>
 
             {/* avatar */}
-            <div style={{ width: 190, height: 340, position: 'relative', marginTop: 44 }}>
+            <div style={{ width: 230, height: 400, position: 'relative', marginTop: 36 }}>
               <AvatarSVG/>
             </div>
 
