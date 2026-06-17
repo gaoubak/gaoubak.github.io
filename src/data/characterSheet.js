@@ -23,6 +23,7 @@ export const characterSheetData = {
       sublabel: 'Backend Core',
       description: 'REST APIs, business logic, Stripe & HubSpot integrations. 2+ years production at Siko Mobility.',
       rarity: 'gold',
+      power: 98,
     },
     {
       id: 'energy',
@@ -31,6 +32,7 @@ export const characterSheetData = {
       sublabel: 'Frontend',
       description: 'Vue 3 Composition API, React 18 hooks, Pinia, SPA architecture, component design systems.',
       rarity: 'gold',
+      power: 92,
     },
     {
       id: 'heavy',
@@ -39,6 +41,7 @@ export const characterSheetData = {
       sublabel: 'Delivery & Infra',
       description: 'Containerized deployments, GitHub Actions pipelines, API Platform JSON-LD generation.',
       rarity: 'blue',
+      power: 84,
     },
   ],
 
@@ -51,6 +54,7 @@ export const characterSheetData = {
       sublabel: 'System Design',
       description: 'Domain modeling, decoupled services, API-first design with clear boundaries.',
       rarity: 'gold',
+      power: 82,
     },
     {
       id: 'arms',
@@ -59,6 +63,7 @@ export const characterSheetData = {
       sublabel: 'Workflow',
       description: 'Feature-branch strategy, CI pipelines, structured code review process.',
       rarity: 'gold',
+      power: 85,
     },
     {
       id: 'chest',
@@ -67,6 +72,7 @@ export const characterSheetData = {
       sublabel: 'Code Quality',
       description: 'PHPUnit, Cypress E2E, code review discipline, clean code practices.',
       rarity: 'blue',
+      power: 76,
     },
     {
       id: 'legs',
@@ -75,6 +81,7 @@ export const characterSheetData = {
       sublabel: 'Methodology',
       description: 'Scrum, cross-functional collaboration, fast context switching between domains.',
       rarity: 'blue',
+      power: 78,
     },
     {
       id: 'class',
@@ -83,6 +90,7 @@ export const characterSheetData = {
       sublabel: 'Class Badge',
       description: 'End-to-end ownership: from DB schema design to deployed, monitored UI.',
       rarity: 'purple',
+      power: 90,
     },
   ],
 
