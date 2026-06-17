@@ -1,3 +1,5 @@
+@tailwind utilities;
+
 /* ─── Variables ────────────────────────────────────────────── */
 :root {
   --gold:    #f5c518;

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import HudBar from './components/HudBar'
-import CharacterScreen from './components/CharacterScreen'
+import CharacterSheet from './components/CharacterSheet'
 import AboutScreen from './components/AboutScreen'
 import SkillsScreen from './components/SkillsScreen'
 import ExperienceScreen from './components/ExperienceScreen'
@@ -14,7 +14,7 @@ function renderScreen(tab) {
     case 'SKILLS':     return <SkillsScreen />
     case 'EXPERIENCE': return <ExperienceScreen />
     case 'PROJECTS':   return <ProjectsScreen />
-    default:           return <CharacterScreen />
+    default:           return <CharacterSheet />
   }
 }
 
