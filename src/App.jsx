@@ -1,51 +1,28 @@
-import { useState } from 'react'
-import HudBar from './components/HudBar'
-import CharacterSheet from './components/CharacterSheet'
-import AboutScreen from './components/AboutScreen'
-import SkillsScreen from './components/SkillsScreen'
-import ExperienceScreen from './components/ExperienceScreen'
-import ProjectsScreen from './components/ProjectsScreen'
-
-const TABS = ['ABOUT', 'SKILLS', 'EXPERIENCE', 'CHARACTER', 'PROJECTS']
-
-function renderScreen(tab) {
-  switch (tab) {
-    case 'ABOUT':      return <AboutScreen />
-    case 'SKILLS':     return <SkillsScreen />
-    case 'EXPERIENCE': return <ExperienceScreen />
-    case 'PROJECTS':   return <ProjectsScreen />
-    default:           return <CharacterSheet />
-  }
-}
+import SiteNav from './components/SiteNav'
+import ErrorBoundary from './components/ErrorBoundary'
+import Hero from './components/sections/Hero'
+import Experience from './components/sections/Experience'
+import Skills from './components/sections/Skills'
+import SolarSystemSection from './components/sections/SolarSystemSection'
+import Contact from './components/sections/Contact'
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('CHARACTER')
-
   return (
     <div className="app">
-      <HudBar activeTab={activeTab} onTabChange={setActiveTab} tabs={TABS} />
-      <main className="main-content">
-        <div className="screen" key={activeTab}>
-          {renderScreen(activeTab)}
-        </div>
+      <SiteNav />
+      <main>
+        <Hero />
+        <Experience />
+        <Skills />
+        <ErrorBoundary fallback={
+          <p style={{ padding: '80px 24px', textAlign: 'center', fontFamily: 'var(--font-body)', color: 'var(--paper-dim)' }}>
+            La scène 3D n'a pas pu s'afficher. Le reste du site fonctionne normalement.
+          </p>
+        }>
+          <SolarSystemSection />
+        </ErrorBoundary>
+        <Contact />
       </main>
-      <footer className="action-bar">
-        <a href="mailto:kader.bakayoko@yahoo.com" className="action-btn">
-          <span className="action-key">[✉]</span> CONTACT
-        </a>
-        <a href="/Kader_Bakayoko_CV.pdf" target="_blank" rel="noreferrer" className="action-btn">
-          <span className="action-key">[↓]</span> CV
-        </a>
-        <div className="action-spacer" />
-        <a
-          href="https://www.linkedin.com/in/kader-bakayoko-341b53190/"
-          target="_blank"
-          rel="noreferrer"
-          className="action-btn action-btn--secondary"
-        >
-          LINKEDIN <span className="action-key">[↗]</span>
-        </a>
-      </footer>
     </div>
   )
 }
